@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
+import com.example.demo.repository.modelo.Habitacion;
 import com.example.demo.repository.modelo.Hotel;
 
 public interface HotelService {
@@ -13,4 +13,10 @@ public interface HotelService {
 	public List<Hotel> seleccionarTodos();
 	
 	public List<Hotel> buscarInnerJoin();
+	public List<Hotel> buscarOuterRightJoin();
+	public List<Hotel> buscarLeftJoin();
+	public List<Habitacion> seleccionarHabitacionLeftJoin();
+	
+	public List<Hotel> buscarFullJoin();
+	public List<Hotel> buscarWhereJoin();
 }

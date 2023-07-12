@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.IHotelRepo;
-
+import com.example.demo.repository.modelo.Habitacion;
 import com.example.demo.repository.modelo.Hotel;
 
 @Service 
@@ -48,6 +48,36 @@ public class HotelServiceImpl implements HotelService{
 	public List<Hotel> buscarInnerJoin() {
 		// TODO Auto-generated method stub
 		return this.hotelRepo.seleccionarInnerJoin();
+	}
+
+	@Override
+	public List<Hotel> buscarOuterRightJoin() {
+		// TODO Auto-generated method stub
+		return this.hotelRepo.seleccionarOuterRightJoin();
+	}
+
+	@Override
+	public List<Hotel> buscarLeftJoin() {
+		// TODO Auto-generated method stub
+		return this.hotelRepo.seleccionarOuterLeftJoin();
+	}
+
+	@Override
+	public List<Habitacion> seleccionarHabitacionLeftJoin() {
+		// TODO Auto-generated method stub
+		return this.hotelRepo.seleccionarHabitacionLeftJoin();
+	}
+
+	@Override
+	public List<Hotel> buscarFullJoin() {
+		// TODO Auto-generated method stub
+		return this.hotelRepo.seleccionarFullJoin();
+	}
+
+	@Override
+	public List<Hotel> buscarWhereJoin() {
+		// TODO Auto-generated method stub
+		return this.hotelRepo.seleccionarWhereJoin();
 	}
 
 
