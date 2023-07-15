@@ -19,4 +19,7 @@ public interface HotelService {
 	
 	public List<Hotel> buscarFullJoin();
 	public List<Hotel> buscarWhereJoin();
+	
+	public List<Hotel> buscarJoinFetch();
+	
 }

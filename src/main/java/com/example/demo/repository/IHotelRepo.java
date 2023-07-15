@@ -23,5 +23,8 @@ public interface IHotelRepo {
 	//Join Where
 	public List<Hotel> seleccionarWhereJoin();
 	
+	public List<Hotel> seleccionarFetchJoin();
+	
+	
 	
 }

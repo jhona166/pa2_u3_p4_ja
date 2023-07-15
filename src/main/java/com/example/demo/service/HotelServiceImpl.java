@@ -17,6 +17,11 @@ public class HotelServiceImpl implements HotelService{
 	@Override
 	public void crear(Hotel hotel) {
 		// TODO Auto-generated method stub
+		
+		//hote.getHabitaciones().get(1).getValor();
+		BigDecimal valorIva = hotel.getHabitaciones().get(1).getValor();
+		BigDecimal ValorTotal = valorIva.multiply(new BigDecimal(1.12));
+		hotel.getHabitaciones().get(1).setValorIncluidoIva(ValorTotal);
 		this.hotelRepo.insertar(hotel);
 	}
 
@@ -78,6 +83,12 @@ public class HotelServiceImpl implements HotelService{
 	public List<Hotel> buscarWhereJoin() {
 		// TODO Auto-generated method stub
 		return this.hotelRepo.seleccionarWhereJoin();
+	}
+
+	@Override
+	public List<Hotel> buscarJoinFetch() {
+		// TODO Auto-generated method stub
+		return this.hotelRepo.seleccionarFetchJoin();
 	}
 
 

@@ -69,7 +69,7 @@ public class HotelRepoImpl implements IHotelRepo {
 			
 			System.out.println(hotel.getHabitaciones().size());
 		}
-				return myQuery.getResultList();
+				return hoteles;
 	}
 
 	@Override
@@ -112,6 +112,15 @@ public class HotelRepoImpl implements IHotelRepo {
 		//select h FROM Hotel h, Habitacion ha WHERE h=ha.hotel
 		TypedQuery<Hotel> myQuery = this.entityManager.createQuery("select h FROM Hotel h, Habitacion ha WHERE h=ha.hotel",Hotel.class);
 		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Hotel> seleccionarFetchJoin() {
+		// TODO Auto-generated method stub
+		TypedQuery<Hotel> myQuery = this.entityManager.createQuery("SELECT h from Hotel h JOIN FETCH h.habitaciones ha",Hotel.class);
+		
+		
+				return myQuery.getResultList();
 	}  
 
 }
