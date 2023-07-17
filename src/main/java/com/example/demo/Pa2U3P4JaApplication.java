@@ -7,18 +7,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.repository.modelo.Habitacion;
-import com.example.demo.repository.modelo.Hotel;
-import com.example.demo.service.HotelService;
+import com.example.demo.repository.modelo.Conseccionaria;
+import com.example.demo.repository.modelo.Vehiculo;
+import com.example.demo.service.ConseccionariaService;
 
 @SpringBootApplication
 public class Pa2U3P4JaApplication implements CommandLineRunner{
 
-	
-	
 	@Autowired
-	private HotelService hotelService;
-	
+	private ConseccionariaService conseccionariaService;
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U3P4JaApplication.class, args);
 	}
@@ -26,70 +23,121 @@ public class Pa2U3P4JaApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-//		List<Hotel> listaHotel =this.hotelService.buscarOuterRightJoin();
-		List<Hotel> listaHotel1 =this.hotelService.buscarInnerJoin();
-
-
-	       
-        System.out.println("Buscar Habitacion INNER Join");
-		for (Hotel hotel : listaHotel1) {
-			System.out.println(hotel);
+		
+		List<Conseccionaria> listaConseccionarias = this.conseccionariaService.buscarInnerJoin();
+		System.out.println("Buscar INNER JOIN");
+		for (Conseccionaria conseccionaria : listaConseccionarias) {
+		       	System.out.println(conseccionaria);
+		       	for (Vehiculo vehiculo:conseccionaria.getVehiculos()) {
+					System.out.println(vehiculo.getNombre());
+				}
+		}
+		
+		List<Conseccionaria> listaConseccionarias1 = this.conseccionariaService.buscarInnerJoin();
+		System.out.println("Buscar INNER JOIN");
+		for (Conseccionaria conseccionaria : listaConseccionarias1) {
+		       	System.out.println(conseccionaria.getNombre());
 		}
 		
 		
-		List<Hotel> listaHotel =this.hotelService.buscarFullJoin();
+		List<Conseccionaria> listaConseccionarias2 = this.conseccionariaService.buscarOuterRightJoin();
+		System.out.println("Buscar OUTER RIGHT JOIN");
+		for (Conseccionaria conseccionaria : listaConseccionarias2) {
+		    	if(conseccionaria==null) {
+		    		System.out.println("Tengo un valor nulo");
+		    		
+		    	}else {
+		    		System.out.println(conseccionaria.getNombre());
+		    	} 
+		    
+		}
+	
+		List<Conseccionaria> listaConseccionarias3 = this.conseccionariaService.buscarOuterRightJoin();
+		System.out.println("Buscar OUTER RIGHT JOIN");
+		for (Conseccionaria conseccionaria : listaConseccionarias3) {
+		    	if(conseccionaria==null) {
+		    		System.out.println("Tengo un valor nulo");
+		    		
+		    	}else {
+		    		System.out.println(conseccionaria.getDireccion());
+		    	} 
+		    
+		}
+		
 
-
-       
-        System.out.println("Buscar Habitacion FULL Join");
-		for (Hotel hotel : listaHotel) {
-			if(hotel==null) {
-				System.out.println("No existe aun un hotel");
+		List<Conseccionaria> listaConseccionarias4 = this.conseccionariaService.buscarOuterLeftJoin();
+		System.out.println("Buscar OUTER LEFT JOIN");
+		for (Conseccionaria conseccionaria : listaConseccionarias4) {
+		    	System.out.println(conseccionaria.getNombre());
+	
+		}
+		
+		List<Conseccionaria> listaConseccionarias5 = this.conseccionariaService.buscarOuterLeftJoin();
+		System.out.println("Buscar OUTER LEFT JOIN");
+		for (Conseccionaria conseccionaria : listaConseccionarias5) {
+		    	System.out.println(conseccionaria.getNombre());
+		    	for (Vehiculo vehi : conseccionaria.getVehiculos()) {
+					System.out.println(vehi.getNombre());
+				}
+		}
+		
+		List<Conseccionaria> listaConseccionarias6 = this.conseccionariaService.buscarFullJoin();
+		System.out.println("Buscar FULL JOIN");
+		for (Conseccionaria conseccionaria : listaConseccionarias6) {
+			if(conseccionaria==null) {
+				System.out.println("Tengo un valor nulo");
 			}else {
-				System.out.println(hotel.getNombre());
+				System.out.println(conseccionaria.getNombre());
 				
 			}
 		}
 		
 		
-		List<Habitacion> listaHabi =this.hotelService.seleccionarHabitacionLeftJoin();
-
-
-	       
-        System.out.println("Buscar Habitacion LeftJoin");
-		for (Habitacion habitacion : listaHabi) {
-			System.out.println(habitacion);
+		List<Conseccionaria> listaConseccionarias7 = this.conseccionariaService.buscarFullJoin();
+		System.out.println("Buscar FULL JOIN");
+		for (Conseccionaria conseccionaria : listaConseccionarias7) {
+			if(conseccionaria==null) {
+				System.out.println("Tengo un valor nulo");
+			}else {
+				System.out.println(conseccionaria.getDireccion());
+			}
 		}
 		
-		
-		System.out.println("Buscar con Join Where");
-		
-		List<Hotel> listaHotel4 =this.hotelService.buscarWhereJoin();
-
-        System.out.println("Buscar Habitacion WHERE Join");
-		for (Hotel hotel : listaHotel4) {
-			System.out.println(hotel);
+	
+		List<Conseccionaria> listaConseccionarias8 = this.conseccionariaService.buscarWhereJoin();
+		System.out.println("Buscar Where JOIN");
+		for (Conseccionaria conseccionaria : listaConseccionarias8) {
+			if(conseccionaria==null) {
+				System.out.println("Tengo un valor nulo");
+			}else {
+				System.out.println(conseccionaria.getNombre());
+			}
 		}
+	
 		
-		
-		List<Hotel> listaHotel6 =this.hotelService.buscarLeftJoin();
-
-
-	       
-        System.out.println("Buscar Habitacion Left Join");
-		for (Hotel hotel : listaHotel6) {
-			System.out.println(hotel);
+		List<Conseccionaria> listaConseccionarias9 = this.conseccionariaService.buscarFetchJoin();
+		System.out.println("Buscar Fetch JOIN");
+		for (Conseccionaria conseccionaria : listaConseccionarias9) {
+			if(conseccionaria==null) {
+				System.out.println("Tengo un valor nulo");
+			}else {
+				System.out.println(conseccionaria.getNombre());
+			}
 		}
-		
-		List<Hotel> listaHotel7 =this.hotelService.buscarOuterRightJoin();
 
-
-	       
-        System.out.println("Buscar Habitacion Right Join");
-		for (Hotel hotel : listaHotel7) {
-			System.out.println(hotel);
+		List<Conseccionaria> listaConseccionarias10 = this.conseccionariaService.buscarFetchJoin();
+		System.out.println("Buscar Fetch JOIN");
+		for (Conseccionaria conseccionaria : listaConseccionarias10) {
+			if(conseccionaria==null) {
+				System.out.println("Tengo un valor nulo");
+			}else {
+				System.out.println(conseccionaria.getTelefono());
+			}
 		}
+
 		
 	}
+	
+	
 
 }

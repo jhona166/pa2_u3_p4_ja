@@ -11,6 +11,7 @@ public interface IHotelRepo {
 	public void eliminar(Integer id);
 	public void actualizar(Hotel hotel);
 	public Hotel seleccionar(Integer id);
+	
 	public List<Hotel> seleccionarTodos();
 	//JOIN
 	public List<Hotel> seleccionarInnerJoin();
