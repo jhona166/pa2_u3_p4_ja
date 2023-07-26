@@ -12,6 +12,9 @@ import com.example.demo.repository.ITransferenciaRepository;
 import com.example.demo.repository.modelo.CuentaBancaria;
 import com.example.demo.repository.modelo.Transferencia;
 
+import jakarta.transaction.Transactional;
+import jakarta.transaction.Transactional.TxType;
+
 @Service
 public class TransferenciaServiceImpl implements ITransferenciaService {
 
@@ -52,35 +55,37 @@ public class TransferenciaServiceImpl implements ITransferenciaService {
 	}
 
 	@Override
+	@Transactional(value=TxType.REQUIRES_NEW)
 	public void realizarTransferencia(String cuentaOrigen, String cuentaDestino, BigDecimal monto) {
 		// TODO Auto-generated method stub
 		CuentaBancaria cOrigen = this.bancariaService.buscarPorNumero(cuentaOrigen);
 		CuentaBancaria cDestino = this.bancariaService.buscarPorNumero(cuentaDestino);
 		BigDecimal saldo = cOrigen.getSaldo();
-		if (monto.compareTo(saldo) == 1) {
+		if (monto.compareTo(saldo) >= 1) {
 			System.out
 					.println("Lo sentimos es imposible realizar la transferencia pues su saldo es insuficiente... :c");
 		} else {
+			
+			//Aumento a cuenta destino
+			BigDecimal saldoActual = cDestino.getSaldo();
+			cDestino.setSaldo(saldoActual.add(monto));
+			this.bancariaService.actualizar(cDestino);
+	
+			
+			//restar saldo
+			BigDecimal saldoActualO = cOrigen.getSaldo();
+			cOrigen.setSaldo(saldoActualO.subtract(monto));
+			this.bancariaService.actualizar(cOrigen);
+			
 			
 			Transferencia transferencia = new Transferencia();
 			transferencia.setCuentaOrigen(cOrigen);
 			transferencia.setCuentaDestino(cDestino);
 			transferencia.setFecha(LocalDate.now());
 			transferencia.setMonto(monto);
-			List<Transferencia>transferenciaL = new ArrayList<>();
-			transferenciaL.add(transferencia);
+			this.transferenciaRepository.insertar(transferencia);
 			
-			//Aumento a cuenta destino
-			BigDecimal saldoActual = cDestino.getSaldo();
-			cDestino.setSaldo(saldoActual.add(monto));
-			this.bancariaService.actualizar(cDestino);
-			System.out.println("Transferencia exitosa :).");
-			
-			//restar saldo
-			BigDecimal saldoActualO = cOrigen.getSaldo();
-			cOrigen.setSaldo(saldoActualO.subtract(monto));
-			cOrigen.setTransferencias(transferenciaL);
-			this.bancariaService.actualizar(cOrigen);
+			//throw new RuntimeException();
 		}
 	}
 
