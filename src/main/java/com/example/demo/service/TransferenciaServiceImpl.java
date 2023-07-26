@@ -25,24 +25,28 @@ public class TransferenciaServiceImpl implements ITransferenciaService {
 	private ICuentaBancariaService bancariaService;
 
 	@Override
+	@Transactional(value=TxType.MANDATORY)
 	public void agregar(Transferencia transferencia) {
 		// TODO Auto-generated method stub
 		this.transferenciaRepository.insertar(transferencia);
 	}
 
 	@Override
+	@Transactional(value=TxType.MANDATORY)
 	public void actualizar(Transferencia transferencia) {
 		// TODO Auto-generated method stub
 		this.transferenciaRepository.actualizar(transferencia);
 	}
 
 	@Override
+	@Transactional(value=TxType.NOT_SUPPORTED)
 	public Transferencia buscarPorID(Integer id) {
 		// TODO Auto-generated method stub
 		return this.transferenciaRepository.seleccionarPorID(id);
 	}
 
 	@Override
+	@Transactional(value=TxType.MANDATORY)
 	public void borrarPorID(Integer id) {
 		// TODO Auto-generated method stub
 		this.transferenciaRepository.eliminarPorID(id);
@@ -85,7 +89,7 @@ public class TransferenciaServiceImpl implements ITransferenciaService {
 			transferencia.setMonto(monto);
 			this.transferenciaRepository.insertar(transferencia);
 			
-			//throw new RuntimeException();
+			throw new RuntimeException();
 		}
 	}
 
