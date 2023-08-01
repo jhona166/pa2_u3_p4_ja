@@ -109,6 +109,16 @@ public class Main {
 			String valorFinal= numero.toString().concat("valor");
 			return valorFinal;
 		};
+	//Metodos referenciales function	
+		MetodosReferenciados metodos1 = new MetodosReferenciados();
+		IPersonaFunction<String,String> fuction2 = metodos1::aceptar1;
+		LOG.info("Function metodos referenciados ");
+		fuction2.aplicar("Jhonatan Altamirano");
+		
+			
+		
+		
+		
 		LOG.info("Function lambda: "+function1.aplicar(10));
 		
 		//5. Unary Operator
@@ -118,7 +128,11 @@ public class Main {
 		IPersonaUnaryFunction<Integer> unary2 =numero-> numero +(numero*2);
 		LOG.info("Unary lambda: "+unary.aplicar(3));
 		
-	
+	//Metodos referenciales unaryOperator
 		
+		MetodosReferenciados metodos2 = new MetodosReferenciados();
+		IPersonaUnaryFunction<Integer> unaryOperator = metodos1::aceptar1;
+		LOG.info("Unary metodos referenciados ");
+		unaryOperator.aplicar(2);
 	}
 }
