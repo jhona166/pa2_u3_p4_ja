@@ -21,11 +21,22 @@ public class MetodosReferenciados {
 		return cadena;
 	}
 	
+	public static String getIdHO() {
+		LOG.info("Metodos referenciados y HO");
+		return "Jhonatan Altamirano";
+	}
+	
 	public Integer aceptar1(Integer arg) {
 		Integer numero =8;
 		numero = numero*5;
 		LOG.info("Unary Operator"+" "+numero);
 		return numero;
 	}
+	
+	public static void aceptar4(String arg) {
+		String cadena ="Jhonatan";
+		LOG.info(cadena+" "+arg);
+	}
+	
 
 }
