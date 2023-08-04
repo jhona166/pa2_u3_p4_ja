@@ -37,6 +37,17 @@ public class MetodosReferenciados {
 		String cadena ="Jhonatan";
 		LOG.info(cadena+" "+arg);
 	}
-	
+	  public static Boolean getPredicateHo(Integer dato){
+	        LOG.info("metodos referenciado predicate HO");
+	        return (9 >= dato);
+	    }
+	    public static String getFunctionHo(Integer dato){
+	        LOG.info("metodos referenciado function HO");
+	        return "ret met ref Funtion: "+dato;
+	    }
+	    public static Integer getUnaryOperatorHo(Integer dato){
+	        LOG.info("metodos referenciado unary Operator HO");
+	        return Math.subtractExact(dato, 9);
+	    }
 
 }

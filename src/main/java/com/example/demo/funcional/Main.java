@@ -205,5 +205,33 @@ public class Main {
 			return num;
 					});
 		listaCambiada2.forEach(cadena->LOG.info(cadena.toString()));
+		
+		
+	
+        //Predicate
+        //1.- Clase 
+        IPersonaPredicate<Integer> predicateHO = new PersonaPredicateImpl();
+        highOrder.metodoPredicate(predicateHO, 19);
+        //2.- lambdas
+        highOrder.metodoPredicate((pre)->Math.subtractExact(pre, 6) <= 8, 16);
+        //3.- Metodos referenciados
+        highOrder.metodoPredicate(MetodosReferenciados::getPredicateHo, 13);
+        //Function
+        //1.- Clase 
+        IPersonaFunction<String,Integer> functionHO = new PersonaFunctionImpl();
+        LOG.info(highOrder.metodoFunction(functionHO, 19));
+        //2.- lambdas
+        LOG.info(highOrder.metodoFunction((pre)->"JA"+pre, 29));
+        LOG.info(highOrder.metodoFunction((pre)->"JA"+pre, 28));
+        //3.- Metodos referenciados
+        LOG.info(highOrder.metodoFunction(MetodosReferenciados::getFunctionHo, 13));
+        //Unary Operator
+        //1.- Clase 
+        IPersonaUnaryOperatorFunction<Integer> unaryHO = new PersonaUnaryOperatorImpl();
+        highOrder.metodoUnaryOperator(unaryHO, 19);
+        //2.- lambdas
+        highOrder.metodoUnaryOperator((arm)->Math.subtractExact(arm, 12), 49);
+        //3.- Metodos referenciados
+        highOrder.metodoUnaryOperator(MetodosReferenciados::getUnaryOperatorHo, 36);
 	}
 }
